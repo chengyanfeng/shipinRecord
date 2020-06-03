@@ -837,7 +837,7 @@ public class RecordingSample implements RecordingEventHandler {
 
 		String decryptionMode = "";
 		String secret = "";
-		String mixResolution = "360,640,15,500";
+		String mixResolution = "100,100,15,100";
 
 		int idleLimitSec = 1* 20;// 60s
 

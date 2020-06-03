@@ -19,7 +19,8 @@ import java.util.Map;
 @EnableAsync
 public class RecordController {
 
-
+    @Autowired
+    conf confdemo;
     @Autowired
     server ser;
 
@@ -30,27 +31,26 @@ public class RecordController {
                          @RequestParam(name = "doctorId", required = true) String doctorId,
                          @RequestParam(name = "patientId", required = true) String patientId
     ) {
-        conf confdemo =new conf();
 
-        if (appId != null&&"".equals(appId)) {
+        if (appId != null&&!"".equals(appId)) {
             confdemo.setAppId(appId);
         }
-        if (channelKey != null&&"".equals(channelKey)) {
+        if (channelKey != null&&!"".equals(channelKey)) {
             confdemo.setChannelKey(channelKey);
         }
-        if (channlName != null&&"".equals(channlName)) {
+        if (channlName != null&&!"".equals(channlName)) {
             confdemo.setChannelName(channlName);
         }
-        if (uid != null&&"".equals(uid)) {
+        if (uid != null&&!"".equals(uid)) {
             confdemo.setUid(uid);
         }
-        if (channelProfile != null&&"".equals(channelProfile)) {
+        if (channelProfile != null&&!"".equals(channelProfile)) {
             confdemo.setChannelProfile(channelProfile);
         }
-        if(patientId ==null&&"".equals(patientId)){
+        if(patientId ==null){
             patientId="patient";
         }
-        if(doctorId ==null&&"".equals(doctorId)){
+        if(doctorId ==null){
             doctorId="doctor";
         }
         System.out.println("---------------doctorId:"+doctorId+"-------patient:"+patientId+"-------------");
@@ -63,18 +63,21 @@ public class RecordController {
         try {
             Thread.sleep(2000);
         } catch (Exception e){
-            System.out.println("当前线程休息2秒后获取录制端是否加入成功频道");
+            System.out.println(e);
         }
-
         Map<String, Boolean> flagMap = ars.getFlagMap();
         Boolean aBoolean = flagMap.get(confdemo.getChannelName());
-        if (aBoolean){
-            flagMap.remove(confdemo.getChannelName());
-            return "{code:200,message:Recording has been start}";
-        }else {
-            return  "{code:400,message:Recording is false}";
-        }
 
+       if(null==aBoolean){
+           return "{code:500,message:server is Exception please check The  Path of AgoraCoreService or NetWork Exception}";
+       }else{
+           if (aBoolean){
+               flagMap.remove(confdemo.getChannelName());
+               return "{code:200,message:Recording has been start}";
+           }else {
+               return  "{code:502,message:Recording is false,please check the server}";
+           }
+       }
     }
 
 

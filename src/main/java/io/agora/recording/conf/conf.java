@@ -11,10 +11,10 @@ public class conf {
     String channelKey = "";
     String channelName = "";
     String channelProfile = "1";
-    String uid ="100000";
+    String uid ="0";
     String decryptionMode = "";
     String secret = "";
-    String mixResolution = "360,640,15,500";
+    String mixResolution = "100,100,15,100";
 
     int idleLimitSec = 5 * 4;// 20s
 
