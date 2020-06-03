@@ -11,7 +11,7 @@ public class conf {
     String channelKey = "";
     String channelName = "";
     String channelProfile = "1";
-    String uid ="0";
+    String uid ="100000";
     String decryptionMode = "";
     String secret = "";
     String mixResolution = "360,640,15,500";

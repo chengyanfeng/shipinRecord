@@ -8,19 +8,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class server {
     @Async
-    public void recording(conf confdemo) {
-        RecordingSDK recordingSdk = new RecordingSDK();
-        RecordingSample ars = new RecordingSample(recordingSdk);
+    public void recording(RecordingSample ars ,conf confdemo,String doctorId,String patientId) {
+
         String[] args = new String[]{
                 "--appId", confdemo.getAppId(), "--uid", confdemo.getUid(), "--appliteDir", confdemo.getApplitePath(),
                 "--channel", confdemo.getChannelName(),
                 "--channelProfile", confdemo.getChannelProfile(),
                 "--idle", Integer.toString(confdemo.getIdleLimitSec()),
-
                 "--channelKey", confdemo.getChannelKey(),
-                "--recordFileRootDir", confdemo.getRecordFileRootDir()
+                "--recordFileRootDir", confdemo.getRecordFileRootDir()+doctorId+"/"+patientId
 
         };
+
         ars.createChannel(args);
         ars.unRegister();
 

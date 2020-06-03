@@ -64,7 +64,8 @@ class UserInfo{
 
 
 public class RecordingSample implements RecordingEventHandler {
-	// java run status flag
+    // java run status flag
+    public   Map<String,Boolean> flagMap=new HashMap<>();
 	private boolean isMixMode = false;
 	private int width = 0;
 	private int height = 0;
@@ -102,14 +103,20 @@ public class RecordingSample implements RecordingEventHandler {
 		this.RecordingSDKInstance = recording;
 		RecordingSDKInstance.registerOberserver(this);
 	}
+    public Map<String, Boolean> getFlagMap() {
+        return flagMap;
+    }
 
-  public static void main(String[] args) {
+    public void setFlagMap(Map<String, Boolean> flagMap) {
+        this.flagMap = flagMap;
+    }
+ /* public static void main(String[] args) {
     //should config -Djava.library.path to load library
     RecordingSDK RecordingSdk = new RecordingSDK();
     RecordingSample ars = new RecordingSample(RecordingSdk);
     ars.createChannel(args);
     ars.unRegister();
-  }
+  }*/
 
 	public void unRegister(){
 		RecordingSDKInstance.unRegisterOberserver(this);	
@@ -135,6 +142,7 @@ public class RecordingSample implements RecordingEventHandler {
     if(config.decodeAudio != AUDIO_FORMAT_TYPE.AUDIO_FORMAT_DEFAULT_TYPE) {
       cleanTimer.schedule(new RecordingCleanTimer(this), 10000);
     }
+      flagMap.put(channelId,true);
     System.out.println("RecordingSDK joinChannel success, channelId:" + channelId +", uid:" + uid);
   }
 
@@ -820,6 +828,7 @@ public class RecordingSample implements RecordingEventHandler {
   }
 
 	public void createChannel(String[] args) {
+
 		int uid = 0;
 		String appId = "";
 		String channelKey = "";
@@ -1130,9 +1139,11 @@ public class RecordingSample implements RecordingEventHandler {
     if (userAccount.length() > 0) {
       RecordingSDKInstance.createChannelWithUserAccount(appId, channelKey, name, userAccount, config, logLevel);
     } else {
-      RecordingSDKInstance.createChannel(appId, channelKey, name, uid, config, logLevel);
+        RecordingSDKInstance.createChannel(appId, channelKey, name, uid, config, logLevel);
     }
     cleanTimer.cancel();
 		System.out.println("jni layer has been exited...");
 	}
+
+
 }
