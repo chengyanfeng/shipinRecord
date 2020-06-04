@@ -24,9 +24,9 @@ public class AsyncTaskConfig implements AsyncConfigurer {
     @Override
     public Executor getAsyncExecutor() {
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
-        taskExecutor.setCorePoolSize(500);// 核心线程数
+        taskExecutor.setCorePoolSize(100);// 核心线程数
         taskExecutor.setMaxPoolSize(500);// 最大线程数
-        taskExecutor.setQueueCapacity(500);// 等待队列
+        taskExecutor.setQueueCapacity(100);// 等待队列
         taskExecutor.setThreadNamePrefix("zxl_taskExecutor-");//线程名称前缀
         taskExecutor.initialize();
         return taskExecutor;
