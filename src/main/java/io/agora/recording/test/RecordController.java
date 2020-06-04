@@ -26,7 +26,7 @@ public class RecordController {
     server ser;
 
     @GetMapping("/record")
-    public String record(@RequestParam(name = "appId", required = true) String appId, @RequestParam(name = "channelKey", required = false) String channelKey,
+    public Map record(@RequestParam(name = "appId", required = true) String appId, @RequestParam(name = "channelKey", required = false) String channelKey,
                          @RequestParam(name = "channlName", required = true) String channlName, @RequestParam(name = "uid", required = false) String uid,
                          @RequestParam(name = "channelProfile", required = false) String channelProfile,
                          @RequestParam(name = "doctorId", required = true) String doctorId,
@@ -73,18 +73,18 @@ public class RecordController {
        if(null==aBoolean){
            returnMap.put("code",500);
            returnMap.put("message","server is Exception please check The  Path of AgoraCoreService or NetWork Exception");
-           return returnMap.toString();
+           return returnMap;
        }else{
            if (aBoolean){
                flagMap.remove(confdemo.getChannelName());
                returnMap.put("code",200);
                returnMap.put("message","Recording has been start");
-               return returnMap.toString();
+               return returnMap;
            }else {
                flagMap.remove(confdemo.getChannelName());
                returnMap.put("code",502);
                returnMap.put("message","Recording is false,please check the server");
-               return  returnMap.toString();
+               return  returnMap;
            }
        }
     }
