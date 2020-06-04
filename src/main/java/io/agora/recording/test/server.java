@@ -19,7 +19,7 @@ public class server {
                 "--recordFileRootDir", confdemo.getRecordFileRootDir()+doctorId+"/"+patientId
 
         };
-
+        System.out.println("------------------------------start recording --------------------------");
         ars.createChannel(args);
         ars.unRegister();
 

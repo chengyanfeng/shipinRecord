@@ -852,8 +852,8 @@ public class RecordingSample implements RecordingEventHandler {
     String subscribeAudioUids = "";
 
 
-		int lowUdpPort = 0;// 40000;
-		int highUdpPort = 0;// 40004;
+		int lowUdpPort = 40000;// 40000;
+		int highUdpPort = 41000;// 40004;
 
 		boolean isAudioOnly = false;
 		boolean isVideoOnly = false;
