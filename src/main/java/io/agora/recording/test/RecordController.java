@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -31,6 +32,7 @@ public class RecordController {
                          @RequestParam(name = "doctorId", required = true) String doctorId,
                          @RequestParam(name = "patientId", required = true) String patientId
     ) {
+        Map<String,Object> returnMap=new HashMap<>();
 
         if (appId != null&&!"".equals(appId)) {
             confdemo.setAppId(appId);
@@ -69,13 +71,20 @@ public class RecordController {
         Boolean aBoolean = flagMap.get(confdemo.getChannelName());
 
        if(null==aBoolean){
-           return "{code:500,message:server is Exception please check The  Path of AgoraCoreService or NetWork Exception}";
+           returnMap.put("code",500);
+           returnMap.put("message","server is Exception please check The  Path of AgoraCoreService or NetWork Exception");
+           return returnMap.toString();
        }else{
            if (aBoolean){
                flagMap.remove(confdemo.getChannelName());
-               return "{code:200,message:Recording has been start}";
+               returnMap.put("code",200);
+               returnMap.put("message","Recording has been start");
+               return returnMap.toString();
            }else {
-               return  "{code:502,message:Recording is false,please check the server}";
+               flagMap.remove(confdemo.getChannelName());
+               returnMap.put("code",502);
+               returnMap.put("message","Recording is false,please check the server");
+               return  returnMap.toString();
            }
        }
     }
