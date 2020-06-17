@@ -20,7 +20,7 @@ public class DemoApplication {
         SpringApplication.run(DemoApplication.class, args);
     }
 
-
+    //以下是springboot的同时启用http和https 协议
   /*  @Bean
     public TomcatServletWebServerFactory servletContainer() { //springboot2 新变化
 
