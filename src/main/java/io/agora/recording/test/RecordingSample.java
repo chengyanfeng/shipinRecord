@@ -839,7 +839,7 @@ public class RecordingSample implements RecordingEventHandler {
 		String secret = "";
 		String mixResolution = "100,100,15,100";
 
-		int idleLimitSec = 1* 20;// 60s
+		int idleLimitSec = 1* 60;// 60s
 
 		String applitePath = "";
     String recordFileRootDir = "";
